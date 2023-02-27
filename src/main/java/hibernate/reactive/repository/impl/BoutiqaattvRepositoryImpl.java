@@ -54,26 +54,4 @@ public class BoutiqaattvRepositoryImpl implements BoutiqaattvRepository {
                 session.createQuery(query)
                         .getResultList()).log();
     }
-//    factory.withSession(
-//    session -> session.find(ChessGame.class, 1L)
-//            .chain(game -> session.fetch(game.getPlayerWhite())
-//            .chain(white -> session.fetch(game.getPlayerBlack()))
-//            .invoke(black -> System.out.println(
-//            game.getPlayerWhite().getFirstName() + " " + game.getPlayerWhite().getLastName() +
-//            " played against " +
-//            game.getPlayerBlack().getFirstName() + " " + game.getPlayerBlack().getLastName())))
-//
-//            ).await().indefinitely();
-
-//    public Uni<List<BrandCountryBlackList>> getBrandByID(int id) {
-//        CriteriaQuery<BrandCountryBlackList> query = sessionFactory.getCriteriaBuilder().createQuery(BrandCountryBlackList.class);
-//        Root<BrandManagement> root = query.from(BrandManagement.class);
-//        Join<BrandManagement,BrandCountryBlackList> join = root.join("brandCountryBlackList");
-//        query.select(join).where((sessionFactory.getCriteriaBuilder().equal(root.get("id"),id)));
-//        return sessionFactory.withSession(session -> session.createQuery(query).getResultList());
-//    }
-
-
-
-
 }
