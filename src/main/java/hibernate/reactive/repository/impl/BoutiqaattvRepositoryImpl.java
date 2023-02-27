@@ -14,6 +14,7 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 
 @Component
 @Transactional
@@ -42,16 +43,35 @@ public class BoutiqaattvRepositoryImpl implements BoutiqaattvRepository {
     @Override
     public Uni<List<BoutiqaatTvProduct>> getProduct(Long tvId){
 //        return sessionFactory.withSession(session -> session.find(Boutiqaattv.class, tvId)
-//                .chain(boutiqaattv -> Mutiny.fetch(boutiqaattv.getProducts())))
+//                .chain(boutiqaattv -> Mutiny.fetch(boutiqaattv.getProducts())));
+
 //                .log();
         CriteriaQuery<BoutiqaatTvProduct> query = sessionFactory.getCriteriaBuilder().createQuery(BoutiqaatTvProduct.class);
         Root<Boutiqaattv> a = query.from(Boutiqaattv.class);
         Join<Boutiqaattv,BoutiqaatTvProduct> b = a.join("products");
-
+        query.select(b).where(sessionFactory.getCriteriaBuilder().equal(a.get("id"), tvId));
         return sessionFactory.withSession(session ->
-                session.createQuery(query.select(b).where(a.get("id").in(tvId)))
+                session.createQuery(query)
                         .getResultList()).log();
     }
+//    factory.withSession(
+//    session -> session.find(ChessGame.class, 1L)
+//            .chain(game -> session.fetch(game.getPlayerWhite())
+//            .chain(white -> session.fetch(game.getPlayerBlack()))
+//            .invoke(black -> System.out.println(
+//            game.getPlayerWhite().getFirstName() + " " + game.getPlayerWhite().getLastName() +
+//            " played against " +
+//            game.getPlayerBlack().getFirstName() + " " + game.getPlayerBlack().getLastName())))
+//
+//            ).await().indefinitely();
+
+//    public Uni<List<BrandCountryBlackList>> getBrandByID(int id) {
+//        CriteriaQuery<BrandCountryBlackList> query = sessionFactory.getCriteriaBuilder().createQuery(BrandCountryBlackList.class);
+//        Root<BrandManagement> root = query.from(BrandManagement.class);
+//        Join<BrandManagement,BrandCountryBlackList> join = root.join("brandCountryBlackList");
+//        query.select(join).where((sessionFactory.getCriteriaBuilder().equal(root.get("id"),id)));
+//        return sessionFactory.withSession(session -> session.createQuery(query).getResultList());
+//    }
 
 
 

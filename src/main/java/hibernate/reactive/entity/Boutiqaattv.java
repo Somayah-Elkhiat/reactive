@@ -88,7 +88,7 @@ public class Boutiqaattv implements Serializable {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany(mappedBy = "boutiqaattv", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "boutiqaattv")
     private Set<BoutiqaatTvProduct> products;
 
 

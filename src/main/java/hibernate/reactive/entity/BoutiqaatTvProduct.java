@@ -3,13 +3,15 @@ package hibernate.reactive.entity;
 import lombok.Data;
 //import org.springframework.data.relational.core.mapping.Table;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Table(name = "boutiqaattv_products")
 @Data
 @IdClass(BoutiqaatProductPK.class)
 @Entity
-public class BoutiqaatTvProduct {
+public class BoutiqaatTvProduct implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Column(name = "created_date")
     private Timestamp createdDate;
@@ -18,13 +20,13 @@ public class BoutiqaatTvProduct {
     private Integer sortOrder;
 
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tv_id")
     private Boutiqaattv boutiqaattv;
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "product_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id" )
     private CatalogProductEntity catalogProductEntity;
 
 }
