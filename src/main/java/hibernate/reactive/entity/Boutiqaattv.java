@@ -69,27 +69,21 @@ public class Boutiqaattv implements Serializable {
     private String thumbnail;
 
     @Column(name = "thumbnail_grid")
-    //    @Column(name = "thumbnail_grid")
     private String thumbnailGrid;
 
     @Column(name = "thumbnail_list")
-    //    @Column(name = "thumbnail_list")
     private String thumbnailList;
 
     @Column(name = "video_url")
-    //    @Column(name = "video_url")
     private String videoUrl;
 
     @Column(name = "views_count")
-    //    @Column(name = "views_count")
     private Integer viewsCount;
 
     @Column(name = "tv_display")
-    //    @Column(name = "tv_display")
     private String tvDisplay;
 
     @Column(name = "exclude_country")
-    //    @Column(name = "exclude_country")
     private String excludeCountry;
 
     @EqualsAndHashCode.Exclude

@@ -6,6 +6,7 @@
     <persistence-unit name="tvManage">
         <provider>org.hibernate.reactive.provider.ReactivePersistenceProvider</provider>
         <properties>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/cams_tv" />
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="Tweety@305" />
@@ -18,10 +19,6 @@
             <property name="connection.autoReconnect" value="true"/>
             <property name="connection.autoReconnectForPools" value="true"/>
             <property name="connection.is-connection-validation-required" value="true"/>
-            <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
-            <property name="hibernate.c3p0.min_size" value="5" />
-            <property name="hibernate.c3p0.max_size" value="20" />
-            <property name="hibernate.c3p0.timeout" value="300" />
         </properties>
     </persistence-unit>
 

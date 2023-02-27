@@ -11,8 +11,8 @@ import java.sql.Timestamp;
 @Entity
 public class BoutiqaatTvProduct {
 
-//    @Column(name = "created_date")
-//    private Timestamp createdDate;
+    @Column(name = "created_date")
+    private Timestamp createdDate;
 
     @Column(name = "sort_order")
     private Integer sortOrder;

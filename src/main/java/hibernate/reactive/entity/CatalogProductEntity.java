@@ -48,7 +48,7 @@ public class CatalogProductEntity {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany(mappedBy = "catalogProductEntity", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "catalogProductEntity")
     private Set<BoutiqaatTvProduct> tvs;
 
 }

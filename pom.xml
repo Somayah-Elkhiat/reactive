@@ -49,11 +49,6 @@
 			<artifactId>vertx-mysql-client</artifactId>
 			<version>4.2.2</version>
 		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-c3p0</artifactId>
-			<version>5.3.6.Final</version>
-		</dependency>
 
 		<dependency>
 			<groupId>com.mysql</groupId>

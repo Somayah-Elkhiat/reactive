@@ -47,9 +47,10 @@ public class BoutiqaattvRepositoryImpl implements BoutiqaattvRepository {
         CriteriaQuery<BoutiqaatTvProduct> query = sessionFactory.getCriteriaBuilder().createQuery(BoutiqaatTvProduct.class);
         Root<Boutiqaattv> a = query.from(Boutiqaattv.class);
         Join<Boutiqaattv,BoutiqaatTvProduct> b = a.join("products");
-        query.where(a.get("id").in(tvId));
-        query.select(b);
-        return sessionFactory.withSession(session -> session.createQuery(query).getResultList());
+
+        return sessionFactory.withSession(session ->
+                session.createQuery(query.select(b).where(a.get("id").in(tvId)))
+                        .getResultList()).log();
     }
 
 
