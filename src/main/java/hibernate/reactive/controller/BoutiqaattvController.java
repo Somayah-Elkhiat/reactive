@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.util.List;
 import java.util.Set;
@@ -36,9 +37,16 @@ public class BoutiqaattvController {
 
     }
 
-    @GetMapping("/products/{id}")
-    public Mono<List<BoutiqaatTvProduct>> getProducts(@PathVariable Long id){
-        return boutiqaattvService.getProducts(id);
+//    @GetMapping("/products/{id}")
+//    public Mono<List<BoutiqaatTvProduct>> getProducts(@PathVariable Long id){
+//        return boutiqaattvService.getProducts(id);
+//
+//    }
 
+    @GetMapping("/products/{id}")
+    public Flux<BoutiqaatTvProduct> getProducts(@PathVariable Long id){
+        return boutiqaattvService.getProducts(id)
+                .flatMapMany(Flux::fromIterable)
+                .subscribeOn(Schedulers.boundedElastic());
     }
 }

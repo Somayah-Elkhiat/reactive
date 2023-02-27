@@ -1,5 +1,6 @@
 package hibernate.reactive.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -88,7 +89,8 @@ public class Boutiqaattv implements Serializable {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany(mappedBy = "boutiqaattv")
+    @OneToMany(mappedBy = "boutiqaattv", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<BoutiqaatTvProduct> products;
 
 

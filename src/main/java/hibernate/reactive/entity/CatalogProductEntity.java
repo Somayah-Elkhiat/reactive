@@ -1,5 +1,6 @@
 package hibernate.reactive.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -48,7 +49,8 @@ public class CatalogProductEntity {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany(mappedBy = "catalogProductEntity")
+    @OneToMany(mappedBy = "catalogProductEntity", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<BoutiqaatTvProduct> tvs;
 
 }

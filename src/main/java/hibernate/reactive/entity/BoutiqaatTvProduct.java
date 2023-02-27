@@ -1,5 +1,6 @@
 package hibernate.reactive.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 //import org.springframework.data.relational.core.mapping.Table;
 import javax.persistence.*;
@@ -22,11 +23,13 @@ public class BoutiqaatTvProduct implements Serializable {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tv_id")
+    @JsonIgnore
     private Boutiqaattv boutiqaattv;
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id" )
+    @JsonIgnore
     private CatalogProductEntity catalogProductEntity;
 
 }
