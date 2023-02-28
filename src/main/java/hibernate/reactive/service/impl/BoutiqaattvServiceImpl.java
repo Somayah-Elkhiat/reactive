@@ -36,7 +36,7 @@ public class BoutiqaattvServiceImpl implements BoutiqaattvService {
     }
 
     @Override
-    public Mono<List<BoutiqaatTvProduct>> getProducts(Long tvId) {
+    public Mono<Set<BoutiqaatTvProduct>> getProducts(Long tvId) {
         return Mono.from(boutiqaattvRepository.getProduct(tvId).convert().toPublisher());
     }
 }

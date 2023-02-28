@@ -18,5 +18,5 @@ public interface BoutiqaattvService {
 
     Flux<Boutiqaattv> getTvs();
 
-    Mono<List<BoutiqaatTvProduct>> getProducts(Long tvId);
+    Mono<Set<BoutiqaatTvProduct>> getProducts(Long tvId);
 }

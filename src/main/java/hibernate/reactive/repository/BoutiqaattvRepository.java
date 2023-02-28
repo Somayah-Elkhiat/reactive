@@ -17,5 +17,5 @@ public interface BoutiqaattvRepository {
 
     Uni<List<Boutiqaattv>> getTvs();
 
-    Uni<List<BoutiqaatTvProduct>> getProduct(Long tvId);
+    Uni<Set<BoutiqaatTvProduct>> getProduct(Long tvId);
 }
