@@ -53,8 +53,10 @@ public class CatalogProductEntity implements Serializable {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany(mappedBy = "catalogProductEntity", fetch = FetchType.LAZY)
+//    @OneToMany(mappedBy = "catalogProductEntity", fetch = FetchType.LAZY)
     @JsonIgnore
+    @Transient
+    @OneToMany(mappedBy = "productId", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<BoutiqaatTvProduct> tvs;
 
 }

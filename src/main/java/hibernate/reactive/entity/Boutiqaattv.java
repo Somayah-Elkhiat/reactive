@@ -30,7 +30,7 @@ public class Boutiqaattv implements Serializable {
     private Integer brandId;
 
     @Column(name = "category_id")
-    private Integer categoryId;
+    private String categoryId;
 
     @Column(name = "celebrity_id")
     private Integer celebrityId;
@@ -89,8 +89,8 @@ public class Boutiqaattv implements Serializable {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany(mappedBy = "boutiqaattv", fetch = FetchType.LAZY)
-    @JsonIgnore
+//    @OneToMany(mappedBy = "boutiqaattv", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tvId", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<BoutiqaatTvProduct> products;
 
 
