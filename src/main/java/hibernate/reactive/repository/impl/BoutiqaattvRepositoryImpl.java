@@ -14,7 +14,6 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Set;
 
 @Component
 @Transactional
@@ -44,14 +43,12 @@ public class BoutiqaattvRepositoryImpl implements BoutiqaattvRepository {
     public Uni<List<BoutiqaatTvProduct>> getProduct(Long tvId){
 //        return sessionFactory.withSession(session -> session.find(Boutiqaattv.class, tvId)
 //                .chain(boutiqaattv -> Mutiny.fetch(boutiqaattv.getProducts())));
-
-//                .log();
         CriteriaQuery<BoutiqaatTvProduct> query = sessionFactory.getCriteriaBuilder().createQuery(BoutiqaatTvProduct.class);
         Root<Boutiqaattv> a = query.from(Boutiqaattv.class);
         Join<Boutiqaattv,BoutiqaatTvProduct> b = a.join("products");
         query.select(b).where(sessionFactory.getCriteriaBuilder().equal(a.get("id"), tvId));
         return sessionFactory.withSession(session ->
                 session.createQuery(query)
-                        .getResultList()).log();
+                        .getResultList());
     }
 }

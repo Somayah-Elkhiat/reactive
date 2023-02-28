@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.Set;
@@ -15,7 +16,10 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Entity
-public class CatalogProductEntity {
+public class CatalogProductEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "row_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

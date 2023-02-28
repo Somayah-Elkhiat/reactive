@@ -2,7 +2,6 @@ package hibernate.reactive.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-//import org.springframework.data.relational.core.mapping.Table;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
