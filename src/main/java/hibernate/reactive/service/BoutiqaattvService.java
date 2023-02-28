@@ -2,6 +2,7 @@ package hibernate.reactive.service;
 
 import hibernate.reactive.entity.BoutiqaatTvProduct;
 import hibernate.reactive.entity.Boutiqaattv;
+import hibernate.reactive.model.TvListRequest;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -19,4 +20,6 @@ public interface BoutiqaattvService {
     Flux<Boutiqaattv> getTvs();
 
     Mono<Set<BoutiqaatTvProduct>> getProducts(Long tvId);
+
+    Mono<List<Boutiqaattv>> getTvs(TvListRequest request, Integer pageIndex, Integer pageSize);
 }

@@ -2,6 +2,7 @@ package hibernate.reactive.service.impl;
 
 import hibernate.reactive.entity.BoutiqaatTvProduct;
 import hibernate.reactive.entity.Boutiqaattv;
+import hibernate.reactive.model.TvListRequest;
 import hibernate.reactive.repository.BoutiqaattvRepository;
 import hibernate.reactive.service.BoutiqaattvService;
 import io.smallrye.mutiny.converters.uni.UniReactorConverters;
@@ -38,5 +39,10 @@ public class BoutiqaattvServiceImpl implements BoutiqaattvService {
     @Override
     public Mono<Set<BoutiqaatTvProduct>> getProducts(Long tvId) {
         return Mono.from(boutiqaattvRepository.getProduct(tvId).convert().toPublisher());
+    }
+
+    @Override
+    public Mono<List<Boutiqaattv>> getTvs(TvListRequest request, Integer pageIndex, Integer pageSize) {
+        return Mono.from(boutiqaattvRepository.getByFilter(request, pageIndex, pageSize).convert().toPublisher());
     }
 }
