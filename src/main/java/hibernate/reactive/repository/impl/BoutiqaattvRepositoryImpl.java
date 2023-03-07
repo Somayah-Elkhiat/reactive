@@ -1,7 +1,9 @@
 package hibernate.reactive.repository.impl;
 
+import hibernate.reactive.entity.BoutiqaatProductPK;
 import hibernate.reactive.entity.BoutiqaatTvProduct;
 import hibernate.reactive.entity.Boutiqaattv;
+import hibernate.reactive.entity.CatalogProductEntity;
 import hibernate.reactive.model.TvListRequest;
 import hibernate.reactive.repository.BoutiqaattvRepository;
 import io.smallrye.mutiny.Uni;
@@ -55,6 +57,30 @@ public class BoutiqaattvRepositoryImpl implements BoutiqaattvRepository {
     public Uni<Set<BoutiqaatTvProduct>> getProduct(Long tvId){
         return sessionFactory.withSession(session -> session.find(Boutiqaattv.class, tvId)
                 .chain(boutiqaattv -> Mutiny.fetch(boutiqaattv.getProducts())));
+    }
+
+    @Override
+    public Uni<List<CatalogProductEntity>> getCatalogProduct(List<Integer> ids){
+        CriteriaQuery<CatalogProductEntity> query = sessionFactory.getCriteriaBuilder().createQuery(CatalogProductEntity.class);
+        Root<CatalogProductEntity> root = query.from(CatalogProductEntity.class);
+        CriteriaBuilder criteriaBuilder = sessionFactory.getCriteriaBuilder();
+        query.select(root).where(root.get("rowId").in(ids));
+        return sessionFactory.withSession(session -> session.createQuery(query).getResultList());
+    }
+
+    @Override
+    public Void saveTvProducts(BoutiqaatTvProduct boutiqaatTvProduct) {
+       return sessionFactory.withTransaction((session, tx) ->
+                session.persist(boutiqaatTvProduct)).await().indefinitely();
+    }
+
+    @Override
+    @Transactional
+    public Object deleteTvProduct(BoutiqaatTvProduct boutiqaatTvProduct, BoutiqaatProductPK productPK) {
+        return sessionFactory.withSession(session ->
+                session.find(BoutiqaatTvProduct.class, productPK)
+                        .chain(session::remove)
+                        .chain(session::flush));
     }
 
     private CriteriaQuery<Boutiqaattv> getFilterQuery(TvListRequest requestOptions) {

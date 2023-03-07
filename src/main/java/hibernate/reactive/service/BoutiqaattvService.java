@@ -9,6 +9,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public interface BoutiqaattvService {
@@ -22,4 +23,8 @@ public interface BoutiqaattvService {
     Mono<Set<BoutiqaatTvProduct>> getProducts(Long tvId);
 
     Mono<List<Boutiqaattv>> getTvs(TvListRequest request, Integer pageIndex, Integer pageSize);
+
+    void mapProductToTv(Long tvId, List<Integer> mapProducts) throws ExecutionException, InterruptedException;
+
+    void unmapProductToTv(Long tvId, List<Integer> mapProducts) throws ExecutionException, InterruptedException;
 }

@@ -2,13 +2,23 @@ package hibernate.reactive.controller;
 
 import hibernate.reactive.entity.BoutiqaatTvProduct;
 import hibernate.reactive.entity.Boutiqaattv;
+import hibernate.reactive.model.MapUnMapProductRequest;
 import hibernate.reactive.model.TvListRequest;
 import hibernate.reactive.service.BoutiqaattvService;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 @RestController
@@ -46,4 +56,17 @@ public class BoutiqaattvController {
                 .flatMapMany(Flux::fromIterable)
                 .subscribeOn(Schedulers.boundedElastic());
     }
+
+    @PostMapping("/mapUnMapProductToTv/{tvId}")
+    public void mapUnMapProductToTv(@NonNull @PathVariable Long tvId,
+                                    @RequestBody MapUnMapProductRequest request)
+            throws ExecutionException, InterruptedException {
+        if (!request.getMapProducts().isEmpty() ) {
+            boutiqaattvService.mapProductToTv(tvId, request.getMapProducts());
+        }
+        if(!request.getUnMapProducts().isEmpty()) {
+            boutiqaattvService.unmapProductToTv(tvId, request.getUnMapProducts());
+        }
+    }
+
 }
